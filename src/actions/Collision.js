@@ -39,7 +39,12 @@ export const fetchCollisionFailed = (error) => {
     }
 }
 
-
+export const setFilter = (data) => {
+    return {
+        type:"SETTING_FILTER",
+        data
+    }
+}
 
 export const fetchAllCollisions = (offset, limit, date) =>{
     return (dispatch) => {

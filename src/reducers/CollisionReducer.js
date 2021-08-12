@@ -1,6 +1,10 @@
-const CollisionReducer = (state={}, action) => {
+const TODAYS_DATE = new Date().toISOString();
+const INITIAL_CONFIG = { currentPage:0, pageSize:10, date: TODAYS_DATE.substr(0, TODAYS_DATE.indexOf('T')), displayType:'grid' }
+const CollisionReducer = (state=INITIAL_CONFIG, action) => {
     let collisions = [];
     switch(action.type){
+        case "SETTING_FILTER":
+            return {...state, ...action.data }
         case "FETCH_ALL_COLLISION_STARTED":
             return {...state, isFetchingCollisions:true, fetchAllCollisionError:null}
         case "FETCH_ALL_COLLISION_COMPLETED":

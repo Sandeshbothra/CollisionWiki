@@ -21,6 +21,7 @@ a:hover{
 
 .display-type-button{
     fill:#aaa;
+    cursor: pointer;
 }
 
 .display-type-button.active{

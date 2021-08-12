@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {connect} from 'react-redux'
-import { fetchAllCollisions } from '../actions/Collision';
+import { fetchAllCollisions, setFilter } from '../actions/Collision';
 import Card from '../components/common/card';
 import FilterMenu from '../components/common/filter-menu/FilterMenu';
 import {FormGroup, Input, Table} from 'reactstrap'
@@ -8,26 +8,28 @@ import { Link, useHistory } from 'react-router-dom';
 import MenuButton from '../components/common/menuButton';
 import CustomTable from '../components/common/custom-table/CustomTable';
 
-const TODAYS_DATE = new Date().toISOString();
-const INITIAL_CONFIG = { currentPage:0, pageSize:10, date: TODAYS_DATE.substr(0, TODAYS_DATE.indexOf('T')) }
-
 const CarCollisonIndex = (props) => {
-    const [filterDetails, setFilterDetails] = React.useState(INITIAL_CONFIG)
-    const [displayType, setDisplayType] = React.useState('grid');
+    const { currentPage, pageSize, date, displayType } = props;
     let history = useHistory();
 
     useEffect(() => {
         fetchCollisions();
     },[]);
 
-    useEffect(() => {
-        fetchCollisions()
-    },[filterDetails])
 
     const fetchCollisions = () => {
-        let {currentPage, pageSize, date} = filterDetails;
+        let {currentPage, pageSize, date} = props;
         date = new Date(date).toISOString().split('Z')[0];
         props.fetchAllCollisions(currentPage * pageSize, (currentPage+1) * pageSize, date);
+    }
+
+    const setDateFilter = (date) => {
+        props.setFilter({currentPage, date, pageSize, displayType});
+        fetchCollisions();
+    }
+
+    const changeDisplayType = (displayType) =>{
+        props.setFilter({currentPage, date, pageSize, displayType});
     }
 
     const generateGird = () => {
@@ -73,15 +75,15 @@ const CarCollisonIndex = (props) => {
                 <div className="container">
                     <FilterMenu>
                         <FormGroup className="col-lg-3 float-end">
-                            <Input type="date" className="float-start" name="date" id="exampleDate" value={filterDetails.date} placeholder="Select Date"
-                            onChange={(e) => setFilterDetails({...filterDetails, date:e.target.value})}
+                            <Input type="date" className="float-start" name="date" id="exampleDate" value={date} placeholder="Select Date"
+                            onChange={(e) => setDateFilter(e.target.value)}
                             />
                         </FormGroup>
                         <div className="float-start col-lg-2">
-                            <div className={`display-type-button float-start px-1 ${displayType === 'grid' ? 'active' : ''}`} onClick={() => setDisplayType('grid')}>
+                            <div className={`display-type-button float-start px-1 ${displayType === 'grid' ? 'active' : ''}`} onClick={() => changeDisplayType('grid')}>
                                 <MenuButton type="grid" />
                             </div>
-                            <div className={`display-type-button float-start px-1 ${displayType === 'list' ? 'active' : ''}`} onClick={() => setDisplayType('list')}>
+                            <div className={`display-type-button float-start px-1 ${displayType === 'list' ? 'active' : ''}`} onClick={() => changeDisplayType('list')}>
                                 <MenuButton type="list" />
                             </div>
                         </div>
@@ -98,13 +100,18 @@ const CarCollisonIndex = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        collisions : state.collisions.collisions || []
+        collisions : state.collisions.collisions || [],
+        currentPage : state.collisions.currentPage,
+        pageSize: state.collisions.pageSize,
+        date: state.collisions.date,
+        displayType:state.collisions.displayType
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        fetchAllCollisions : (offset, limit, date) => {dispatch(fetchAllCollisions(offset, limit, date)) }
+        fetchAllCollisions: (offset, limit, date) => { dispatch(fetchAllCollisions(offset, limit, date)) },
+        setFilter:(data) => { dispatch(setFilter(data)) }
     }
 }
 
