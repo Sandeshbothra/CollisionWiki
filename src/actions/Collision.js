@@ -19,12 +19,27 @@ export const fetchAllCollisionFailed = (error) => {
     }
 }
 
-export const setSelectedCollision = (id) => {
+export const fetchCollisionStarted = () => {
     return {
-        type:"SETTING_SELECTED_COLLISION",
-        id
+        type:"FETCH_COLLISION_STARTED"
     }
 }
+
+export const fetchCollisionCompleted = (payload) => {
+    return {
+        type:"FETCH_COLLISION_COMPLETED",
+        payload
+    }
+}
+
+export const fetchCollisionFailed = (error) => {
+    return {
+        type:"FETCH_COLLISION_FAILED",
+        error
+    }
+}
+
+
 
 export const fetchAllCollisions = (offset, limit, date) =>{
     return (dispatch) => {
@@ -47,6 +62,12 @@ export const fetchAllCollisions = (offset, limit, date) =>{
     }
 }
 
-export const fetchFillteredData = () => {
-
+export const  fetchCollision = (id) => {
+    return (dispatch) => {
+        CollisionApi.get(`resource/h9gi-nx95.json?collision_id=${id}`).then((response) => {
+            dispatch(fetchCollisionCompleted(response.data[0]));
+        }).catch((error) => {
+            dispatch(fetchCollisionFailed(error));
+        })
+    }
 }

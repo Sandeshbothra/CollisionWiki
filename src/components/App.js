@@ -1,13 +1,15 @@
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import CarCollisionIndex from "../routes/CarCollisionIdex";
 import CarCollisionDetail from "../routes/CarCollisionDetail";
 
 const App = () => {
     return (
-        <Switch>
-            <Route path="/" component={CarCollisionIndex}/>
-            <Route path="/:id" children={<CarCollisionDetail/>}/>
-        </Switch>
+        <BrowserRouter>
+            <Switch>
+                <Route exact path="/" component={CarCollisionIndex}/>
+                <Route path="/:id" component={CarCollisionDetail}/>
+            </Switch>
+        </BrowserRouter>
     )    
 }
 
