@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Table } from "reactstrap"
-import MenuButton from '../menuButton';
+import MenuButton from '../buttons/menuButton';
 
 const CustomTable = (props) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);

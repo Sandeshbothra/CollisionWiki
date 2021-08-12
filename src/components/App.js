@@ -1,5 +1,5 @@
 import { Switch, Route, BrowserRouter } from "react-router-dom";
-import CarCollisionIndex from "../routes/CarCollisionIdex";
+import CarCollisionIndex from "../routes/CarCollisionIndex";
 import CarCollisionDetail from "../routes/CarCollisionDetail";
 
 const App = () => {
