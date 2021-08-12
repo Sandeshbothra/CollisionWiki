@@ -26,10 +26,20 @@ export const setSelectedCollision = (id) => {
     }
 }
 
-export const fetchAllCollisions = () =>{
+export const fetchAllCollisions = (offset, limit, date) =>{
     return (dispatch) => {
         dispatch(fetchAllCollisionStarted());
-        CollisionApi.get("resource/h9gi-nx95.json").then((response) => {
+        let url = 'resource/h9gi-nx95.json?';
+        if(offset){
+            url = url + `$offset=${offset}`
+        }
+        if(limit){
+            url = url + `&$limit=${limit}`
+        }
+        if(date){
+            url = url + `&crash_date=${date}`
+        }
+        CollisionApi.get(url).then((response) => {
             dispatch(fetchAllCollisionCompleted(response.data));
         }).catch((error) => {
             dispatch(fetchAllCollisionFailed(error));

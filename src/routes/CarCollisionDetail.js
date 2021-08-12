@@ -1,15 +1,17 @@
 import { useEffect } from "react";
 import {connect} from 'react-redux';
 import { fetchAllCollisions } from '../actions/Collision';
+import {useParams} from 'react-router-dom';
 
 const CarCollisionDetail = (props) => {
+    const params = useParams();
     useEffect(() => {
-        console.log(props)
+        console.log(params)
     },[])
 
     return(
         <div>
-            
+
         </div>
     )
     

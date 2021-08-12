@@ -1,10 +1,10 @@
 .card-main{
     height: 10rem;
     float: left;
-    width: 20rem;
     border: 1px solid #dfdfdf;
     border-radius: 5px;
-    margin: 1rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
 }
 
 .card-main .content {
@@ -16,4 +16,13 @@
     justify-content: center;
     height: 2rem;
     border-top: 1px solid #dfdfdf ;
+    align-items: center;
+    color: #ffffff;
+    background-color: #008080;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.card-main:hover{
+    box-shadow: 5px 5px 10px 1px #bbb;
 }
