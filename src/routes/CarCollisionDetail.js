@@ -11,14 +11,14 @@ const CarCollisionDetail = (props) => {
     
     useEffect(() => {
         let selectedCollision = props.collisions.find((collision) => {
-            return collision.collision_id == params.id;
+            return collision.collision_id === params.id;
         });
         if(!selectedCollision){
             props.fetchCollision(params.id)
         }else{ 
             setSelectedCollision(selectedCollision);
         }
-    },[props.collisions])
+    },[props, params.id])
 
     return(
         <div>

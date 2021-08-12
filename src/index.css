@@ -18,3 +18,20 @@ a:hover{
     border-radius: 5px;
     width: 10rem;
 }
+
+.display-type-button{
+    fill:#aaa;
+}
+
+.display-type-button.active{
+    fill:#666;
+}
+
+.table-action-icon{
+    border:1px solid #aaa;
+    border-radius: 10px;
+}
+
+tr .dropdown-menu{
+    padding: 0rem;
+}
