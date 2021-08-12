@@ -1,7 +1,11 @@
 const DetailComponent = (props) => {
     const titleText = (text) => {
-        return text.split('_').map((t) => {
-            return t[0].toUpperCase() + t.slice(1).toLowerCase();
+        return text.split('_').map((t, index) => {
+            if(index === 0 ){
+                return t[0].toUpperCase() + t.slice(1).toLowerCase();
+            }else{
+                return t.toLowerCase();
+            }
         }).join(' ');
     }
 

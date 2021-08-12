@@ -25,8 +25,8 @@ const CarCollisionDetail = (props) => {
             {selectedCollision ?
                 <div className="container">
                     <h2 className="py-2 px-2 mb-0 page-header">
-                        <p className="mb-0">Collision  Details
-                        <div className="mx-1 text-muted">{selectedCollision.crash_date}</div></p>
+                        <p className="mb-0">Collision  Details</p>
+                        <div className="mx-1 text-muted">{selectedCollision.on_street_name}</div>
                     </h2>
                     <hr className="mt-0"/>
                     <div className="container">
